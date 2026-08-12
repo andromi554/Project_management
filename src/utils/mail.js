@@ -1,50 +1,42 @@
-import mailgen from "mailgen";
+import Mailgen from "mailgen";
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";        
 
 const sendEmail = async (options) => {
-    //initialize default brading
     const mailGenerator = new Mailgen({
         theme: "default",
         product: {
-            name:"Task manager",
+            name: "Task manager",
             link: "https://taskmanager.link.com"
         }
-    })
-    //based on the "options" we generate the mail
+    });
+
     const emailTextual = mailGenerator.generatePlaintext(options.mailgenContent);
     const emailHtml = mailGenerator.generate(options.mailgenContent);
 
-    //semding the email  modile
-    const transporter  = nodemailer.createTransport({
-        host:process.env.MAILTRAP_SMTP_HOST,
-        port:process.env.MAILTRAP_SMTP_PORT,
-        auth:{
-            user:process.env.MAILTRAP_SMTP_USER,
-            pass:process.env.MAILTRAP_SMTP_PASS
-
+    const transporter = nodemailer.createTransport({
+        host: process.env.MAILTRAP_SMTP_HOST,
+        port: process.env.MAILTRAP_SMTP_PORT,
+        auth: {
+            user: process.env.MAILTRAP_SMTP_USER,
+            pass: process.env.MAILTRAP_SMTP_PASS
         }
-
-
-    })
+    });
 
     const mail = {
         from: "ExampleTeam <team@exmple.com>",
-        to:options.email,
-        subject:options.subject,
+        to: options.email,
+        subject: options.subject,
         text: emailTextual,
         html: emailHtml
-    }
+    };
+
     try {
-        await trasporter.sendMail(mail)
-        
-    }catch(error){
-        console.error("Error while sending mail:", err);
-
+        await transporter.sendMail(mail);
+    } catch (error) {
+        console.error("Error while sending mail:", error);
     }
-
-//for some useless reasons i copied the api key of mailtrap = "d053fd8d632ff9c08a6723f02a31b480"
-    
-}
+};
 
 
 

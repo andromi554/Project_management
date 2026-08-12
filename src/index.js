@@ -21,3 +21,13 @@ connectDB()
     process.exit(1);
   })
 
+
+
+
+import "dotenv/config";
+console.log({
+    host: process.env.MAILTRAP_SMTP_HOST,
+    port: process.env.MAILTRAP_SMTP_PORT,
+    user: process.env.MAILTRAP_SMTP_USER,
+    pass: process.env.MAILTRAP_SMTP_PASS ? "LOADED" : "MISSING"
+});

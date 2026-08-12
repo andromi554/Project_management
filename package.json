@@ -17,11 +17,14 @@
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
+    "crypto": "^1.0.1",
     "dotenv": "^17.4.1",
     "express": "^5.2.1",
+    "express-validator": "^7.3.2",
     "install": "^0.13.0",
     "jsonwebtoken": "^9.0.3",
-    "mongodb": "^7.3.0",
+    "mailgen": "^2.0.36",
+    "mongodb": "^7.5.0",
     "mongoose": "^9.7.0",
     "nodemailer": "^9.0.3"
   }
